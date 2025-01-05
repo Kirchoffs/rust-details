@@ -245,6 +245,48 @@ let add_one_v5 = |x|               x + 1  ;
 >> cargo test -- --show-output
 ```
 
+## Automatic Type Conversion
+### Reference Coercion
+#### From &T to &U
+If type T implements the Deref or DerefMut traits (`deref` returns &U), references to T can be coerced into references to U.
+
+#### From &mut T to &mut U
+
+#### From &[T; N] to &[T]
+
+### Trait Object Coercion
+``` Rust
+trait Greet {
+    fn greet(&self);
+}
+
+struct Person;
+
+impl Greet for Person {
+    fn greet(&self) {
+        println!("Hello!");
+    }
+}
+
+fn greet_person(greeter: &dyn Greet) {
+    greeter.greet();
+}
+
+fn main() {
+    let person = Person;
+    greet_person(&person); // `&Person` is coerced to `&dyn Greet`.
+}
+```
+
+### Numeric Literal Coercion
+``` Rust
+fn main() {
+    let x: i32 = 42;  // Literal is coerced to `i32`.
+    let y: f64 = 42;  // Literal is coerced to `f64`.
+    println!("x = {}, y = {}", x, y);
+}
+```
+
 ## Code Analysis
 ### Peekable<Chars>
 Peekable:

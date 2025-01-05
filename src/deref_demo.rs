@@ -47,7 +47,7 @@ mod test {
         
         {
             let customized_box_string = CustomizedBox::<String>::new("hello".to_string());
-            // print_string(customized_box_string.deref());
+            print_string(customized_box_string.deref());
             print_string(&customized_box_string);
         }
     }
