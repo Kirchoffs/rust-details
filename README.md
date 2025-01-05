@@ -245,6 +245,48 @@ let add_one_v5 = |x|               x + 1  ;
 >> cargo test -- --show-output
 ```
 
+## Automatic Type Conversion
+### Reference Coercion
+#### From &T to &U
+If type T implements the Deref or DerefMut traits (`deref` returns &U), references to T can be coerced into references to U.
+
+#### From &mut T to &mut U
+
+#### From &[T; N] to &[T]
+
+### Trait Object Coercion
+```rust
+trait Greet {
+    fn greet(&self);
+}
+
+struct Person;
+
+impl Greet for Person {
+    fn greet(&self) {
+        println!("Hello!");
+    }
+}
+
+fn greet_person(greeter: &dyn Greet) {
+    greeter.greet();
+}
+
+fn main() {
+    let person = Person;
+    greet_person(&person); // `&Person` is coerced to `&dyn Greet`.
+}
+```
+
+### Numeric Literal Coercion
+```rust
+fn main() {
+    let x: i32 = 42;  // Literal is coerced to `i32`.
+    let y: f64 = 42;  // Literal is coerced to `f64`.
+    println!("x = {}, y = {}", x, y);
+}
+```
+
 ## Code Analysis
 ### Peekable<Chars>
 Peekable:
@@ -294,3 +336,6 @@ impl<T> Option<T> {
 
 Here, `predicate` is `FnOnce(&T) -> bool` and `T` in our case is `&char`.  
 So according to `P: FnOnce(&T) -> bool`, the parameter type of `predicate` is `&&char`.
+
+## Leak
+`Box::leak` can convert `Box<T>` into `&'static T`. This is useful when you need to store a reference to a value with a lifetime that is not tied to a particular scope.

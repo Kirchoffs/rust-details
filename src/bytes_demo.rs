@@ -24,4 +24,20 @@ mod test {
         let s = String::from_utf8(buffer.to_vec()).expect("Found invalid UTF-8");
         println!("{}", s);
     }
+
+    #[test]
+    fn next_vec_of_byte_without_common_prefix_demo() {
+        // let mut v = "Hello".to_string().into_bytes();
+        let mut v = "Hello".as_bytes().to_vec();
+
+        while let Some(last) = v.iter_mut().last() {
+            if *last == u8::MAX {
+                v.pop();
+            } else {
+                *last += 1;
+                break;
+            }
+        }
+        println!("{:?}", String::from_utf8(v));
+    }
 }
