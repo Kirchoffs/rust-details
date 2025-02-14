@@ -1,7 +1,9 @@
 #[cfg(test)]
 mod test {
+    use serde::{Serialize, Serializer};
+
     #[test]
-    fn serialize_and_deserialize_demo() {
+    fn serde_json_serialize_and_deserialize_demo() {
         #[derive(serde::Serialize, serde::Deserialize, Debug)]
         struct Person {
             name: String,
@@ -12,6 +14,7 @@ mod test {
             name: "Alice".to_string(),
             age: 42,
         };
+
         let serialized_person = serde_json::to_string(&person).unwrap();
         println!("serialized_person: {}", serialized_person);
 
@@ -20,7 +23,7 @@ mod test {
     }
 
     #[test]
-    fn deserialize_demo() {
+    fn serde_json_deserialize_demo() {
         #[derive(serde::Deserialize, Debug)]
         struct Person<'a> {
             name: &'a str,
@@ -33,7 +36,7 @@ mod test {
     }
 
     #[test]
-    fn deserialize_owned_demo() {
+    fn serde_json_deserialize_owned_demo() {
         #[derive(serde::Deserialize, Debug)]
         struct Person {
             name: String,
