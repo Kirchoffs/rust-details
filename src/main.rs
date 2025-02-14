@@ -59,7 +59,7 @@ mod condvar_demo;
 mod box_demo;
 mod macros_demo;
 mod type_state_pattern_demo;
-mod serde_json_demo;
+mod serde_demo;
 mod tokio_demo;
 mod barrier_demo;
 mod atomic_demo;
@@ -81,7 +81,10 @@ mod impl_dyn_demo;
 mod simple_error_processing_demo;
 mod error_progressive_demo;
 mod reference_lifetime;
-mod serialize_enum;
+mod bincode_demo;
+mod cow_demo;
+mod impl_trait_demo;
+mod function_variance_demo;
 
 fn main() {
     println!("Hello, world!");
