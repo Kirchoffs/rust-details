@@ -85,6 +85,7 @@ mod bincode_demo;
 mod cow_demo;
 mod impl_trait_demo;
 mod function_variance_demo;
+mod mut_self_demo;
 
 fn main() {
     println!("Hello, world!");
